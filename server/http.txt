@@ -1,0 +1,12 @@
+1. Create router = express.Router()
+
+2. POST: /api/auth/register => 
+    validate register if data inputted:
+        if(!username || !password) => bad request (status 400, success: false, message: missing data)
+    check existing:
+        if (username) => stt 400
+    hashed password:
+
+    //JSONWebToken
+ localhost:PORT/api/auth
+
