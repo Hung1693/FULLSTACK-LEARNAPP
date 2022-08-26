@@ -3,6 +3,7 @@ import {  Navigate, Route, Routes } from "react-router-dom";
 // import Landing from "./components/layout/Landing";
 import Auth from "./views/Auth";
 import AuthContextProvider from "./contexts/AuthContext";
+import DashBoard from "./views/DashBoard";
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
         path="/register"
         // element={(props) => <Auth {...props} authRoute="register" />}
         element={<Auth authRoute="register" />}
-      />
+        />
+        <Route path="/dashboard" element={<DashBoard />} />
       </Routes>
       </AuthContextProvider>
   );

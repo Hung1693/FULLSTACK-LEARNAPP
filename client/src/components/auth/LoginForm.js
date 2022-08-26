@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -9,9 +9,11 @@ const LoginForm = () => {
   //take loginUser = AuthContext from AuthContext.js
   const { loginUser } = useContext(AuthContext);
   //-----------------------------------------------/
-
-  //Local state = login input value
+  //useHistory to redirect to dashboard
+  const navigate = useNavigate();
+  //----------------------------------------------/
   // Local state
+  //Local state = login input value
   const [loginForm, setLoginForm] = useState({
     username: "",
     password: "",
@@ -38,8 +40,9 @@ const LoginForm = () => {
     try {
       //get data from loginUser, login form is user's input
       const loginData = await loginUser(loginForm);
-      console.log(loginForm);
-      console.log(loginData);
+      // console.log("login data ", loginData);
+      //if login is successful, redirect to home page dashboard
+      if (loginData) { navigate("/dashboard") };
     } catch (error) {
       console.log(error);
     }
