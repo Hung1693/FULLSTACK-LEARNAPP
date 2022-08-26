@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
 const app = express(); //Initialized express
+const cors = require("cors");
 const { DATABASE_URL, NODE_ENV, PORT } = process.env;
 const pool = require("./configs/database");
 pool.connect((err) => {
@@ -15,6 +16,7 @@ pool.connect((err) => {
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", async (req, res) => {
   try {
@@ -47,8 +49,7 @@ app.post("/register", async (req, res) => {
     res.send("Error" + err);
   }
 });
-
-
+/********************************************************/
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -59,10 +60,10 @@ app.post("/login", async (req, res) => {
     if (password === result.rows[0].password) {
       return res.send(result.rows[0]);
     } else {
-      return res.status(401).send("Wrong username or password");
+      return res.status(401).send("Invalid username or password");
     }
   } catch (err) {
-    res.send("Error " + err);
+    res.send("Error from server " + err);
   }
 });
 //////////////////////////////////////////////////////////////

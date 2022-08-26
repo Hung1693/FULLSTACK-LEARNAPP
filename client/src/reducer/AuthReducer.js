@@ -1,3 +1,5 @@
+
+//initialState in AuthContext.js
 export const authReducer = (state, action) => {
     const { type, payload } = action
     
