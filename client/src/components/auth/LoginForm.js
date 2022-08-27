@@ -37,17 +37,20 @@ const LoginForm = () => {
 
   //login submit function
 
-  let alert = {};
+  let [alertMessage, setAleartMessage] = useState(null);
   const login = async (event) => {
     event.preventDefault();
     try {
       //get data from loginUser, login form is user's input
       const loginData = await loginUser(loginForm);
-      // console.log("login data ", loginData);
+      console.log("login data ", loginData);
       //if login is successful, redirect to home page dashboard
-      if (loginData) {
+      if (typeof loginData === "object") {
         navigate("/dashboard");
-      } 
+      } else {
+        setAleartMessage({ type: "danger", message: loginData });
+          // alert(loginData);
+      }
       
     
     } catch (error) {
@@ -59,6 +62,7 @@ const LoginForm = () => {
   return (
     <>
       <Form className="my-4" onSubmit={login}>
+        <AlertMessage info={alertMessage} />
         <Form.Group>
           <Form.Control
             type="text"

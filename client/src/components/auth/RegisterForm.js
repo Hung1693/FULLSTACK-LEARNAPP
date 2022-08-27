@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import AlertMessage from "../layout/AlertMess";
 
 const RegisterForm = () => {
   let navigate = useNavigate();
@@ -24,25 +25,32 @@ const RegisterForm = () => {
     });
   console.log("register form ", registerForm);
 
+  let [alertMessage, setAleartMessage] = useState(null);
   const register = async (event) => {
     event.preventDefault();
       if (password !== confirmPassword) {
-        alert("Passwords do not match");
+        setAleartMessage({ type: "danger", message: 'Password does not match' });
         return;
       }
     try {
       
       const registerData = await registerUser(registerForm);
-      if (registerData) {
+      if(registerData === 'Username exists') {
+        setAleartMessage({ type: "danger", message: registerData });
+        return;
+      }
+      if (registerData !== 'Username exists') {
         navigate("/login");
       }
+      console.log("register data ", registerData);
     } catch (error) {
-      console.log(error);
+      
     }
   };
   return (
     <>
       <Form className="my-4" onSubmit={register}>
+        <AlertMessage info={alertMessage} />
         <Form.Group>
           <Form.Control
             className="my-2 login-form"

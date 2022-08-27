@@ -63,7 +63,7 @@ app.post("/login", async (req, res) => {
       return res.status(401).send("Invalid username or password");
     }
   } catch (err) {
-    res.send("Error from server " + err);
+    res.send('Invalid username or password');
   }
 });
 //////////////////////////////////////////////////////////////
