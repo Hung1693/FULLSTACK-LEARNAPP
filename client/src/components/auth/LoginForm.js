@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import AlertMessage from "../layout/AlertMess";
 
 const LoginForm = () => {
   // Context to use AuthContext.Provider value={authContextData}
@@ -19,7 +20,7 @@ const LoginForm = () => {
     password: "",
   });
   //------------------------------------------------/
-
+  
   //get username and password from loginForm. This happens when user types in username and password
   const { username, password } = loginForm;
   //------------------------------------------------/
@@ -30,11 +31,13 @@ const LoginForm = () => {
       //se computed property to update properties in state loginForm
       { ...loginForm, [event.target.name]: event.target.value }
       //console log to see if it works
-      );
-      
+    );
+
   //-----------------------------------------------/
 
   //login submit function
+
+  let alert = {};
   const login = async (event) => {
     event.preventDefault();
     try {
@@ -42,12 +45,14 @@ const LoginForm = () => {
       const loginData = await loginUser(loginForm);
       // console.log("login data ", loginData);
       //if login is successful, redirect to home page dashboard
-      if (loginData) { navigate("/dashboard") };
+      if (loginData) {
+        navigate("/dashboard");
+      } 
+      
+    
     } catch (error) {
       console.log(error);
     }
-
-    
   };
   //------------------------------------------------/
 
