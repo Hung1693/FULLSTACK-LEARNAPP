@@ -1,20 +1,13 @@
 import { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
-// import { authReducer } from "../reducer/AuthReducer";
 import { apiUrl } from "./constant";
+import { useNavigate } from "react-router";
 
 export const AuthContext = createContext();
-
 //AuthContextProvider to wrap around the entire app to pass down the state to all the components
 const AuthContextProvider = ({ children }) => {
-  //   const [authState, dispatch] = useReducer(authReducer, {
-  //     //user login
-  //     authLoading: true,
-  //     //user waiting for authentication
-  //     isAuthenticated: false,
-  //     user: null,
-  //   });
-
+  const navigate = useNavigate();
+  
   //**********Login****************************/
   //pass userForm = form value in LoginForm.js
   const loginUser = async (userForm) => {
@@ -59,6 +52,7 @@ const AuthContextProvider = ({ children }) => {
   //**********Logout****************************/
   const logoutUser = () => {
     localStorage.removeItem("appUserName");
+    navigate('/login')
   };
     //-----------------------------------------------/
 

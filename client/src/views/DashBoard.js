@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate} from 'react-router-dom';
+import  NavbarMenu  from '../components/layout/Navbar';
 
 const DashBoard = () => {
     //check if user is logged in
@@ -14,6 +15,7 @@ const DashBoard = () => {
 
     return (
         <div>
+        <NavbarMenu/>
             <h1>Dash</h1>
         </div>
     );

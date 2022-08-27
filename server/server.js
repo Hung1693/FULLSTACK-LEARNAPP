@@ -10,7 +10,7 @@ pool.connect((err) => {
   if (err) {
     console.log(err);
   } else {
-    console.log("Data logging initiated!");
+    console.log("PostgresSQL Connected");
   }
 });
 app.use(express.urlencoded({ extended: false }));
@@ -63,11 +63,73 @@ app.post("/login", async (req, res) => {
       return res.status(401).send("Invalid username or password");
     }
   } catch (err) {
-    res.send('Invalid username or password');
+    res.send("Invalid username or password");
   }
 });
 //////////////////////////////////////////////////////////////
 
+//*-----------------GET ALL POSTS FROM {username}-----------------*/
+app.get("/dashboard/:username", async (req, res) => {
+  const { username } = req.params;
+  try {
+    const result = await pool.query(
+      `select * from posts where username = $1;`,
+      [username]
+    );
+    res.send(result.rows);
+  } catch (err) {
+    res.send("Error " + err);
+  }
+});
+//-----------------------------------------------------------------/
+
+//*-----------------DELETE POSTS FROM {username}-----------------*/
+app.delete("/dashboard/:username/:post_id", async (req, res) => {
+  const { username, post_id } = req.params;
+  try {
+    const result = await pool.query(
+      `delete from posts where username = $1 and post_id = $2;`,
+      [username, post_id]
+    );
+    res.send("Post deleted");
+  } catch (err) {
+    res.send("Error " + err);
+  }
+});
+//---------------------------------------------------//
+//*-----------------ADD POSTS FROM {username}-----------------*/
+app.post("/dashboard/:username", async (req, res) => {
+  const { username } = req.params;
+  const { title, description, url, status } = req.body;
+  try {
+    const result = await pool.query(
+      `INSERT INTO posts(title, description, url, status, username) VALUES($1, $2, $3, $4, $5) returning *;`,
+      [title, description, url, status, username]
+    );
+    res.send(result.rows[0]);
+  } catch (err) {
+    res.send("Error " + err);
+  }
+});
+//---------------------------------------------------//
+
+//*-----------------UPDATE POSTS FROM {username}-----------------*/
+app.put("/dashboard/:username/:post_id", async (req, res) => {
+  const { username, post_id } = req.params;
+  const { title, description, url, status } = req.body;
+  try {
+    const result = await pool.query(
+      `UPDATE posts SET title = coalesce($1, title), description = coalesce($2, description), url = coalesce($3, url), status = coalesce($4, status)
+       WHERE username = $5 and post_id = $6 returning *;`,
+      [title, description, url, status, username, post_id]
+    );
+    res.send(result.rows[0]);
+  } catch (err) {
+    res.send("Error " + err);
+  }
+});
+//---------------------------------------------------//
+
 app.listen(PORT, () => {
-  console.log(`Here we go, Engines started at ${PORT}.`);
+  console.log(`Listen on port ${PORT}.`);
 });

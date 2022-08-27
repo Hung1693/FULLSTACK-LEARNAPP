@@ -150,3 +150,33 @@ button.post-button.btn:active {
 	bottom: 5%;
 }
 
+.nav-username{
+	display: inline-block;
+	color: black;
+	font-weight: 700;
+	padding-top: 3px;
+}
+.logo{
+	display: inline-block;
+	/* margin-left: 2rem; */
+}
+
+.home-nav{
+	font-weight: 700;
+}
+
+.time-greeting{
+	font-weight: 700;
+	margin-bottom: -4px;
+}
+
+ h6{
+	color: white;
+	margin-bottom: -6px;
+}
+h3{
+	color: white;
+	margin-left: 5px;
+	margin-bottom: 0px;
+}
+
