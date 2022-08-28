@@ -12,6 +12,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Col from "react-bootstrap/Col";
 import addIcon from "../assets/plus-circle-fill.svg";
 import SinglePost from "../components/layout/SinglePost";
+import AddPostModal from "../components/layout/AddPostModal";
 
 const DashBoard = () => {
   const appUserName = localStorage.getItem("appUserName");
@@ -19,12 +20,14 @@ const DashBoard = () => {
   const {
     postState: { posts, postsLoading },
     getPosts,
+    setShowAddPostModal,
+    showAddPostModal,
   } = useContext(PostContext);
-  console.log(posts);
+  // console.log(posts);
   // Start: Get all posts
   useEffect(() => getPosts, []);
   let body = null;
-  console.log(posts.length);
+  // console.log(posts.length);
   if (posts.length === 0) {
     body = (
       <>
@@ -37,12 +40,12 @@ const DashBoard = () => {
             <Card.Text>
               A journey of a thousand miles begins with a single step - Lao Tzu
             </Card.Text>
-            <Button
+            {/* <Button
               variant="primary"
-              //   onClick={setShowAddPostModal.bind(this, true)}
+                onClick={setShowAddPostModal(true)}
             >
-              Add your first learning skill here
-            </Button>
+              Add your first desired skill here
+            </Button> */}
           </Card.Body>
         </Card>
       </>
@@ -62,11 +65,11 @@ const DashBoard = () => {
         <OverlayTrigger
           placement="left"
           //overlay <Tooltip> when hover on the button
-          overlay={<Tooltip>Add a new thing to learn</Tooltip>}
+          overlay={<Tooltip>Add a new skill to learn</Tooltip>}
         >
           <Button
             className="btn-floating"
-            //   onClick={setShowAddPostModal.bind(this, true)}
+              onClick={()=>setShowAddPostModal(true)}
           >
             <img src={addIcon} alt="add-post" width="60" height="60" />
           </Button>
@@ -96,6 +99,7 @@ const DashBoard = () => {
           progress's status
         </h5>
         {body}
+        <AddPostModal />
       </div>
     </>
   );

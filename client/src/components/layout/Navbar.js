@@ -42,13 +42,14 @@ const NavbarMenu = () => {
   const day = weekday[d.getDay()];
   const date = d.getDate();
   const hours = d.getHours();
+  // console.log(hours)
   let greeting = "";
-  if (hours > 12) {
+  if (18 > hours > 12) {
     greeting = "Good Afternoon";
-  } else if (hours > 0) {
-    greeting = "Good Morning";
-  } else {
+  } else if (hours > 18) {
     greeting = "Good Evening";
+  } else {
+    greeting = "Good Morning";
   }
   const time = `${day}, ${month} ${date}, ${year}`;
 
@@ -70,8 +71,8 @@ const NavbarMenu = () => {
       </Navbar.Brand>
 
       <Nav className="time-greeting">
-        <h6>{`${time} `}</h6>
-        <h3>{` ${greeting}, ${username.toUpperCase()}`}</h3>
+        <h6>{`${time} ${greeting}, ${username.toUpperCase()}`}</h6>
+        
       </Nav>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
 

@@ -98,7 +98,7 @@ app.delete("/dashboard/:username/:post_id", async (req, res) => {
 });
 //---------------------------------------------------//
 //*-----------------ADD POSTS FROM {username}-----------------*/
-app.post("/dashboard/:username", async (req, res) => {
+app.post("/dashboard/add/:username", async (req, res) => {
   const { username } = req.params;
   const { title, description, url, status } = req.body;
   try {
@@ -106,7 +106,8 @@ app.post("/dashboard/:username", async (req, res) => {
       `INSERT INTO posts(title, description, url, status, username) VALUES($1, $2, $3, $4, $5) returning *;`,
       [title, description, url, status, username]
     );
-    res.send(result.rows[0]);
+    res.send(
+    {"success": true, "post": result.rows[0]});
   } catch (err) {
     res.send("Error " + err);
   }

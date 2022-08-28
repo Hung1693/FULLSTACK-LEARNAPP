@@ -27,6 +27,7 @@ export const postReducer = (state, action) => {
     case ADD_POST:
       return {
         ...state,
+        //add new post to posts array
         posts: [...state.posts, payload],
       };
 
