@@ -20,7 +20,7 @@ const LoginForm = () => {
     password: "",
   });
   //------------------------------------------------/
-  
+
   //get username and password from loginForm. This happens when user types in username and password
   const { username, password } = loginForm;
   //------------------------------------------------/
@@ -46,13 +46,11 @@ const LoginForm = () => {
       console.log("login data ", loginData);
       //if login is successful, redirect to home page dashboard
       if (typeof loginData === "object") {
-        navigate("/dashboard");
+        navigate(`/dashboard/`);
       } else {
         setAleartMessage({ type: "danger", message: loginData });
-          // alert(loginData);
+        // alert(loginData);
       }
-      
-    
     } catch (error) {
       console.log(error);
     }

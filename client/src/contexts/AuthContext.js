@@ -1,4 +1,4 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext } from "react";
 import axios from "axios";
 import { apiUrl } from "./constant";
 import { useNavigate } from "react-router";
@@ -13,7 +13,7 @@ const AuthContextProvider = ({ children }) => {
   const loginUser = async (userForm) => {
     try {
       const response = await axios.post(`${apiUrl}/login`, userForm);
-      //   console.log(response.data);
+        console.log(response.data);
       //response.dat is built-in to retrieve status from backend
       if (response.data) {
         //save username to localStorage

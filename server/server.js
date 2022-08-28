@@ -76,7 +76,7 @@ app.get("/dashboard/:username", async (req, res) => {
       `select * from posts where username = $1;`,
       [username]
     );
-    res.send(result.rows);
+    res.send({"success": true, "allPosts": result.rows } );
   } catch (err) {
     res.send("Error " + err);
   }
