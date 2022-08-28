@@ -13,17 +13,9 @@ CREATE TABLE posts(
 	description text,
     url text,
     status text,
-    user_id integer,
+    username text,
     CONSTRAINT fk_user
-     FOREIGN KEY(user_id) 
-	  REFERENCES users(user_id)
+     FOREIGN KEY(username) 
+	  REFERENCES users(username)
 	  ON DELETE CASCADE ON UPDATE CASCADE
 );
-INSERT INTO users(username, password)
-VALUES('name1', 'pass1'),
-      ('name2', 'pass2');
-      
-INSERT INTO posts(title, description, url, status, user_id)
-VALUES('title1.0', 'des1.0', 'url1.0', 'stat1.0', 1),
-      ('title1.1', 'des1.1', 'url1.1', 'stat1.1', 1),
-      ('title2.0', 'des2.0', 'url2.0', 'stat2.0', 2);

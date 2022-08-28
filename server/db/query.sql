@@ -1,10 +1,11 @@
 -- SELECT *
 
--- FROM users
+-- FROM posts
 
 -- INNER JOIN posts
 
--- ON users.user_id = posts.user_id;
+-- ON users.username = posts.username;
 
 -- select username from users;
 select * from users;
+-- select * from posts;

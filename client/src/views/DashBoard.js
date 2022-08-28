@@ -1,11 +1,11 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { PostContext } from "../contexts/PostContext";
 import { Navigate } from "react-router-dom";
 import NavbarMenu from "../components/layout/Navbar";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
-import Toast from "react-bootstrap/Toast";
+
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -19,13 +19,12 @@ const DashBoard = () => {
   const appUserName = localStorage.getItem("appUserName");
   //context and get all posts data from postReducer.js
   const {
-    postState: { post, posts, postsLoading },
+    postState: { post, posts },
     getPosts,
     setShowAddPostModal,
   } = useContext(PostContext);
   // console.log(posts);
   // Start: Get all posts
-
 
   useEffect(() => getPosts, []);
   let body = null;
@@ -42,10 +41,7 @@ const DashBoard = () => {
             <Card.Text>
               A journey of a thousand miles begins with a single step - Lao Tzu
             </Card.Text>
-            <Button
-              variant="primary"
-                onClick={()=>setShowAddPostModal(true)}
-            >
+            <Button variant="primary" onClick={() => setShowAddPostModal(true)}>
               Add your first desired skill here
             </Button>
           </Card.Body>
@@ -72,7 +68,7 @@ const DashBoard = () => {
         >
           <Button
             className="btn-floating"
-              onClick={()=>setShowAddPostModal(true)}
+            onClick={() => setShowAddPostModal(true)}
           >
             <img src={addIcon} alt="add-post" width="60" height="60" />
           </Button>

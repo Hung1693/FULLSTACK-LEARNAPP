@@ -6,6 +6,7 @@ import AuthContextProvider from "./contexts/AuthContext";
 import DashBoard from "./views/DashBoard";
 import PostContextProvider from "./contexts/PostContext";
 
+
 function App() {
   return (
     <AuthContextProvider>
