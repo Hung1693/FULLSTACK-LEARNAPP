@@ -84,7 +84,7 @@ app.get("/dashboard/:username", async (req, res) => {
 //-----------------------------------------------------------------/
 
 //*-----------------DELETE POSTS FROM {username}-----------------*/
-app.delete("/dashboard/:username/:post_id", async (req, res) => {
+app.delete("/dashboard/delete/:username/:post_id", async (req, res) => {
   const { username, post_id } = req.params;
   try {
     const result = await pool.query(
@@ -115,7 +115,7 @@ app.post("/dashboard/add/:username", async (req, res) => {
 //---------------------------------------------------//
 
 //*-----------------UPDATE POSTS FROM {username}-----------------*/
-app.put("/dashboard/:username/:post_id", async (req, res) => {
+app.put("/dashboard/update/:username/:post_id", async (req, res) => {
   const { username, post_id } = req.params;
   const { title, description, url, status } = req.body;
   try {
@@ -124,7 +124,7 @@ app.put("/dashboard/:username/:post_id", async (req, res) => {
        WHERE username = $5 and post_id = $6 returning *;`,
       [title, description, url, status, username, post_id]
     );
-    res.send(result.rows[0]);
+    res.send({"success": true, "post": result.rows[0]});
   } catch (err) {
     res.send("Error " + err);
   }

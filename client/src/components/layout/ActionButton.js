@@ -1,10 +1,17 @@
 import React from "react";
 import { useContext } from "react";
+import{PostContext} from "../../contexts/PostContext";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-import youtube from "../../assets/youtube.svg";
+
+
 
 const ActionButton = ({ url, post_id }) => {
+  const { deletePost, findPost, setShowUpdatePostModal } =
+    useContext(PostContext);
+  const choosePost = postId => {
+		findPost(postId)
+		setShowUpdatePostModal(true)
+	}
   return (
     <div>
       <Button
@@ -18,14 +25,14 @@ const ActionButton = ({ url, post_id }) => {
       </Button>
       <Button
         className="btn btn-outline-primary post-button"
-        href={url}
-        target="_blank"
+        onClick={() => { choosePost(post_id) }}
+
       >
         <span className="card-icon">
           <i className="bi bi-pencil"></i>
         </span>
       </Button>
-      <Button className="post-button" href={url} target="_blank">
+      <Button className="post-button" onClick={()=>deletePost(post_id)}>
         <span className="card-icon">
           <i className="bi bi-trash3 trash-icon"></i>
         </span>

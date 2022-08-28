@@ -15,8 +15,7 @@ const PostContextProvider = ({ children }) => {
   //--------------------------------------------------/
   //********POST MODAL**************************** */
   const [showAddPostModal, setShowAddPostModal] = useState(false);
-  
-
+  const [showUpdatePostModal, setShowUpdatePostModal] = useState(false);
   //--------------------------------------------------/
 
   //************GET ALL POSTS********************* */
@@ -48,6 +47,7 @@ const PostContextProvider = ({ children }) => {
         `${apiUrl}/dashboard/add/${appUserName}`,
         newPost
       );
+      console.log(response.data);
       if (response.data.success) {
         dispatch({
           type: "ADD_POST",
@@ -60,9 +60,57 @@ const PostContextProvider = ({ children }) => {
       else return { success: false, message: error.message };
     }
   };
+  //--------------------------------------------------/
+  //************DELETE POST********************* */
+  const deletePost = async (postId) => {
+    try {
+      const appUserName = localStorage.getItem("appUserName");
+      const response = await axios.delete(
+        `${apiUrl}/dashboard/delete/${appUserName}/${postId}`
+      );
+      if (response.data === "Post deleted") {
+        dispatch({
+          type: "DELETE_POST",
+          payload: postId,
+        });
+        console.log(postState);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //--------------------------------------------------/
 
-
-
+  //************UPDATE POST********************* */
+  //------------find post------------------------//
+  const findPost = (postId) => {
+    const post = postState.posts.find((post) => post.post_id === postId);
+    dispatch({
+      type: "FIND_POST",
+      payload: post,
+    });
+    // console.log(post.post_id)
+  };
+  
+  //--------------------------------------------------/
+  //------------------update--------------------//
+  const updatePost = async (updatedPost) => {
+    const appUserName = localStorage.getItem("appUserName");
+    try {
+      const response = await axios.put(
+        `${apiUrl}/dashboard/update/${appUserName}/${updatedPost.post_id}`,
+        updatedPost
+      );
+      if (response.data.success) {
+        dispatch({ type: "UPDATE_POST", payload: response.data.post });
+        return response.data;
+      }
+    } catch (error) {
+      return error.response.data
+        ? error.response.data
+        : { success: false, message: "Server error" };
+    }
+  };
   //--------------------------------------------------/
 
   // Post context data export to other components
@@ -72,13 +120,11 @@ const PostContextProvider = ({ children }) => {
     setShowAddPostModal,
     showAddPostModal,
     addPost,
-    // showUpdatePostModal,
-    // setShowUpdatePostModal,
-    // showToast,
-    // setShowToast,
-    // deletePost,
-    // findPost,
-    // updatePost,
+    deletePost,
+    updatePost,
+    findPost,
+    showUpdatePostModal,
+    setShowUpdatePostModal,
   };
   return (
     <PostContext.Provider value={postContextData}>

@@ -13,18 +13,20 @@ import Col from "react-bootstrap/Col";
 import addIcon from "../assets/plus-circle-fill.svg";
 import SinglePost from "../components/layout/SinglePost";
 import AddPostModal from "../components/layout/AddPostModal";
+import UpdatePostModal from "../components/layout/UpdateModal";
 
 const DashBoard = () => {
   const appUserName = localStorage.getItem("appUserName");
   //context and get all posts data from postReducer.js
   const {
-    postState: { posts, postsLoading },
+    postState: { post, posts, postsLoading },
     getPosts,
     setShowAddPostModal,
-    showAddPostModal,
   } = useContext(PostContext);
   // console.log(posts);
   // Start: Get all posts
+
+
   useEffect(() => getPosts, []);
   let body = null;
   // console.log(posts.length);
@@ -40,12 +42,12 @@ const DashBoard = () => {
             <Card.Text>
               A journey of a thousand miles begins with a single step - Lao Tzu
             </Card.Text>
-            {/* <Button
+            <Button
               variant="primary"
-                onClick={setShowAddPostModal(true)}
+                onClick={()=>setShowAddPostModal(true)}
             >
               Add your first desired skill here
-            </Button> */}
+            </Button>
           </Card.Body>
         </Card>
       </>
@@ -54,6 +56,7 @@ const DashBoard = () => {
     body = (
       <>
         <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3">
+          {/*posts = payload from postReducer.js */}
           {posts.map((post) => (
             <Col key={post.post_id} className="my-2">
               <SinglePost post={post} />
@@ -93,13 +96,10 @@ const DashBoard = () => {
     <>
       <NavbarMenu />
       <div className="container">
-        <div> "" </div>
-        <h5>
-          Recommend either "LEARNED", "LEARNING", or "NEXT" to update learning
-          progress's status
-        </h5>
+        <h5>Happy Learning!</h5>
         {body}
         <AddPostModal />
+        {post !== null && <UpdatePostModal />}
       </div>
     </>
   );

@@ -32,17 +32,20 @@ export const postReducer = (state, action) => {
       };
 
     case DELETE_POST:
+      
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id !== payload),
+        //filter out the post with the id that matches the payload = postId from deletePost function
+        posts: state.posts.filter((post) => post.post_id !== payload),
       };
 
     case FIND_POST:
       return { ...state, post: payload };
 
     case UPDATE_POST:
+      //if the post id matches the payload id, then update the post with the payload
       const newPosts = state.posts.map((post) =>
-        post._id === payload._id ? payload : post
+        post.post_id === payload.post_id ? payload : post
       );
 
       return {

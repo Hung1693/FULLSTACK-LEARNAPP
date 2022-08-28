@@ -6,7 +6,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 function AddPostModal() {
-  const { showAddPostModal, setShowAddPostModal,addPost, getPosts } = useContext(PostContext);
+  const { showAddPostModal, setShowAddPostModal, addPost, getPosts } =
+    useContext(PostContext);
 
   //add state for add post form
   const [newPost, setNewPost] = useState({
@@ -20,17 +21,16 @@ function AddPostModal() {
     console.log(event.target.value);
     setNewPost({ ...newPost, [event.target.name]: event.target.value });
   };
-//when click outside modal, close modal and clear form
+  //when click outside modal, close modal and clear form
   const resetAddPostData = () => {
     setNewPost({ title: "", description: "", url: "", status: "TO LEARN" });
     setShowAddPostModal(false);
   };
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        const { success, message } = await addPost(newPost);
-        resetAddPostData();
-    };
-
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const { success, message } = await addPost(newPost);
+    resetAddPostData();
+  };
 
   return (
     //onHide to close modal when you click outside the modal
