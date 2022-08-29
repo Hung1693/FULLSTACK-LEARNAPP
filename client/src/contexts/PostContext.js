@@ -40,6 +40,7 @@ const PostContextProvider = ({ children }) => {
   //--------------------------------------------------/
   //************ADD POST********************* */
   const addPost = async (newPost) => {
+    //newPost is the post object (request body) from AddPostModal.js
     const appUserName = localStorage.getItem("appUserName");
     try {
       //body newPost
@@ -63,6 +64,7 @@ const PostContextProvider = ({ children }) => {
   //--------------------------------------------------/
   //************DELETE POST********************* */
   const deletePost = async (postId) => {
+    //postId is the post_id from the post object
     try {
       const appUserName = localStorage.getItem("appUserName");
       const response = await axios.delete(

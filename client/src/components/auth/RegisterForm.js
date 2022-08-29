@@ -23,7 +23,7 @@ const RegisterForm = () => {
       ...registerForm,
       [event.target.name]: event.target.value,
     });
-  console.log("register form ", registerForm);
+  // console.log("register form ", registerForm);
 
   let [alertMessage, setAleartMessage] = useState(null);
   const register = async (event) => {
@@ -42,7 +42,7 @@ const RegisterForm = () => {
       if (registerData !== 'Username exists') {
         navigate("/login");
       }
-      console.log("register data ", registerData);
+      // console.log("register data ", registerData);
     } catch (error) {
       
     }

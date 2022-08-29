@@ -1,7 +1,7 @@
 export const apiUrl =
   process.env.NODE_ENV !== "production"
-    ? "https://rocky-anchorage-15433.herokuapp.com/"
-    : "https://rocky-anchorage-15433.herokuapp.com/";
+    ? "http://localhost:3001"
+    : "https://powerful-dusk-74846.herokuapp.com";
 
 export const POSTS_LOADED_SUCCESS = "POSTS_LOADED_SUCCESS";
 export const POSTS_LOADED_FAIL = "POSTS_LOADED_FAIL";
