@@ -1,7 +1,8 @@
 export const apiUrl =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:3001"
-    : "https://powerful-dusk-74846.herokuapp.com";
+    // ? "http://localhost:3001"
+    ? "http://hungnguyen:xFMsE94mx3of570Yy1VKfTVXHCeKxLZt@dpg-ccaljj9a6gdmn7sbrh0g-a.oregon-postgres.render.com/asalala"
+    : "http://postgres://hungnguyen:xFMsE94mx3of570Yy1VKfTVXHCeKxLZt@dpg-ccaljj9a6gdmn7sbrh0g-a.oregon-postgres.render.com/asalala";
 
 export const POSTS_LOADED_SUCCESS = "POSTS_LOADED_SUCCESS";
 export const POSTS_LOADED_FAIL = "POSTS_LOADED_FAIL";
