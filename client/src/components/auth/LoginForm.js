@@ -3,12 +3,14 @@ import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import {PostContext} from '../../contexts/PostContext';
 import AlertMessage from "../layout/AlertMess";
 
 const LoginForm = () => {
   // Context to use AuthContext.Provider value={authContextData}
   //take loginUser = AuthContext from AuthContext.js
   const { loginUser } = useContext(AuthContext);
+  const {getPosts} = useContext(PostContext);
   //-----------------------------------------------/
   //useHistory to redirect to dashboard
   const navigate = useNavigate();
@@ -43,10 +45,11 @@ const LoginForm = () => {
     try {
       //get data from loginUser, login form is user's input
       const loginData = await loginUser(loginForm);
-      console.log("login data ", loginData);
+      // console.log("login data ", loginData);
       //if login is successful, redirect to home page dashboard
       if (typeof loginData === "object") {
         navigate(`/dashboard/`);
+        getPosts();
       } else {
         setAleartMessage({ type: "danger", message: loginData });
         // alert(loginData);

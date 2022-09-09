@@ -32,6 +32,8 @@ const PostContextProvider = ({ children }) => {
             payload: response.data.allPosts,
           }
         );
+        // console.log("🚀 ~ file: PostContext.js ~ line 36 ~ getPosts ~ response.data", response.data)
+        return response.data;
       }
     } catch (error) {
       dispatch({ type: "POSTS_LOADED_FAIL" });

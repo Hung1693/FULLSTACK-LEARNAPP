@@ -34,7 +34,7 @@ const DashBoard = () => {
       <>
         <Card className="text-center mx-5 my-5">
           <Card.Header as="h1">
-            Hi, {appUserName.toLocaleUpperCase()}
+            Hi, {appUserName.toUpperCase()}
           </Card.Header>
           <Card.Body>
             <Card.Title>Welcome to Asalala</Card.Title>
